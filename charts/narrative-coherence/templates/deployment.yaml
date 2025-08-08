@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: narrative-coherence
+  labels:
+    app: narrative-coherence
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: narrative-coherence
+  template:
+    metadata:
+      labels:
+        app: narrative-coherence
+    spec:
+      containers:
+        - name: narrative-coherence
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "narrative-coherence"

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-reco
+  labels:
+    app: ai-reco
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: ai-reco
+  template:
+    metadata:
+      labels:
+        app: ai-reco
+    spec:
+      containers:
+        - name: ai-reco
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "ai-reco"

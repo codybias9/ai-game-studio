@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moon-pool-seed
+  labels:
+    app: moon-pool-seed
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: moon-pool-seed
+  template:
+    metadata:
+      labels:
+        app: moon-pool-seed
+    spec:
+      containers:
+        - name: moon-pool-seed
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "moon-pool-seed"

@@ -1,0 +1,11 @@
+global:
+  image:
+    tag: ""
+server:
+  extraArgs:
+    - --insecure
+  service:
+    type: LoadBalancer
+configs:
+  cm:
+    accounts.admin: login, apiKey

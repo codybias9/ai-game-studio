@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: REPLACE_ECR_URL/ai-game-studio/REPO_NAME
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+
+env: []

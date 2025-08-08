@@ -1,0 +1,23 @@
+# Seed a handful of design archetypes; replace with your 100+ library.
+- id: 1
+  title: "Deckbuilder Roguelike — Time Dilation"
+  genre: "roguelike"
+  core_fantasy: "Freeze and resume time to stack combo chains."
+  ai_hook: "Adaptive enemy behaviors that learn your deck preferences."
+  target_kpi:
+    retention_d1: 0.35
+    retention_d7: 0.12
+  region_tag: "global"
+  ethics_cost: 1
+  examples: ["Slay the Spire", "Hades"]
+- id: 2
+  title: "Social Deduction — Proximity Chat Heist"
+  genre: "party"
+  core_fantasy: "Co-op heist with traitor mechanics."
+  ai_hook: "Voice analysis to detect stress and misdirection."
+  target_kpi:
+    retention_d1: 0.40
+    retention_d7: 0.15
+  region_tag: "global"
+  ethics_cost: 2
+  examples: ["Among Us"]

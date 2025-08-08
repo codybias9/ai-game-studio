@@ -1,0 +1,11 @@
+replicaCount: 1
+image:
+  repository: rabbitmq
+  tag: 3.13-management
+service:
+  type: ClusterIP
+  port: 5672
+  mgmtPort: 15672
+persistence:
+  enabled: true
+  size: 5Gi

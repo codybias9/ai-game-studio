@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: svc-meta-learner
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ai-game-studio
+    targetRevision: main
+    path: charts/meta-learner
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idea-pipeline
+  syncPolicy: { automated: { prune: true, selfHeal: true } }

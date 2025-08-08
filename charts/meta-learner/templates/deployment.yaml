@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meta-learner
+  labels:
+    app: meta-learner
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: meta-learner
+  template:
+    metadata:
+      labels:
+        app: meta-learner
+    spec:
+      containers:
+        - name: meta-learner
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "meta-learner"

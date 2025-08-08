@@ -1,0 +1,5 @@
+image:
+  repository: codenotary/immudb
+  tag: v1.5.0
+service:
+  port: 3322

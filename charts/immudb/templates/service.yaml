@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata: { name: immudb }
+spec:
+  selector: { app: immudb }
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 3322

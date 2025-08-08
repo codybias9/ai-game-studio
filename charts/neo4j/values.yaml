@@ -1,0 +1,8 @@
+image:
+  repository: neo4j
+  tag: 5.20
+service:
+  bolt: 7687
+  http: 7474
+persistence:
+  size: 10Gi

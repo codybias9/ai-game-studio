@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mech-plot-mix
+  labels:
+    app: mech-plot-mix
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: mech-plot-mix
+  template:
+    metadata:
+      labels:
+        app: mech-plot-mix
+    spec:
+      containers:
+        - name: mech-plot-mix
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "mech-plot-mix"

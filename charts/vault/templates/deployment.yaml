@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: vault }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: vault } }
+  template:
+    metadata: { labels: { app: vault } }
+    spec:
+      containers:
+        - name: vault
+          image: "{{ .Values.server.image }}"
+          args: ["server", "-dev", "-dev-listen-address=0.0.0.0:8200"]
+          ports: [{ containerPort: 8200 }]

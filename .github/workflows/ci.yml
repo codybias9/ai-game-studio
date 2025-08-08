@@ -1,0 +1,56 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_GITHUB_ROLE_ARN }}
+          role-session-name: gha-deploy
+
+      - name: Login to Amazon ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build & push images (all services)
+        env:
+          ECR_REGISTRY: ${{ steps.ecr.outputs.registry }}
+          REPO_PREFIX: ${{ secrets.ECR_REPOSITORY_PREFIX }}
+        run: |
+          set -e
+          for dir in services/*; do
+            svc=$(basename "$dir")
+            docker build -t $ECR_REGISTRY/$REPO_PREFIX/$svc:latest "./services/$svc"
+            docker push $ECR_REGISTRY/$REPO_PREFIX/$svc:latest
+          done
+
+      - name: Patch chart image repos
+        run: |
+          sed -i "s|REPLACE_ECR_URL|${{ steps.ecr.outputs.registry }}|g" charts/*/values.yaml
+
+      - name: Upload Helm manifests (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: helm-charts
+          path: charts/**
+
+  gitops-sync:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Argo CD sync (optional)
+        if: ${{ secrets.ARGOCD_SERVER && secrets.ARGOCD_AUTH_TOKEN }}
+        run: |
+          curl -k -X POST             -H "Authorization: Bearer ${{ secrets.ARGOCD_AUTH_TOKEN }}"             ${{ secrets.ARGOCD_SERVER }}/api/v1/applications/app-of-apps/sync

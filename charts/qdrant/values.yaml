@@ -1,0 +1,7 @@
+image:
+  repository: qdrant/qdrant
+  tag: v1.9.1
+persistence:
+  size: 10Gi
+service:
+  port: 6333

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gene-sampler
+  labels:
+    app: gene-sampler
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: gene-sampler
+  template:
+    metadata:
+      labels:
+        app: gene-sampler
+    spec:
+      containers:
+        - name: gene-sampler
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "gene-sampler"

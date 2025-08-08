@@ -1,0 +1,111 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-rabbitmq
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ai-game-studio
+    targetRevision: main
+    path: charts/rabbitmq
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idea-pipeline
+  syncPolicy: { automated: { prune: true, selfHeal: true } }
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-vault
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ai-game-studio
+    targetRevision: main
+    path: charts/vault
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idea-pipeline
+  syncPolicy: { automated: { prune: true, selfHeal: true } }
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-qdrant
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ai-game-studio
+    targetRevision: main
+    path: charts/qdrant
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idea-pipeline
+  syncPolicy: { automated: { prune: true, selfHeal: true } }
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-neo4j
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ai-game-studio
+    targetRevision: main
+    path: charts/neo4j
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idea-pipeline
+  syncPolicy: { automated: { prune: true, selfHeal: true } }
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-minio
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ai-game-studio
+    targetRevision: main
+    path: charts/minio
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idea-pipeline
+  syncPolicy: { automated: { prune: true, selfHeal: true } }
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-clickhouse
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ai-game-studio
+    targetRevision: main
+    path: charts/clickhouse
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idea-pipeline
+  syncPolicy: { automated: { prune: true, selfHeal: true } }
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-immudb
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ai-game-studio
+    targetRevision: main
+    path: charts/immudb
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idea-pipeline
+  syncPolicy: { automated: { prune: true, selfHeal: true } }

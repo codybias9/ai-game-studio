@@ -1,0 +1,7 @@
+image:
+  repository: clickhouse/clickhouse-server
+  tag: 24.6
+service:
+  port: 8123
+persistence:
+  size: 10Gi

@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: immudb }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: immudb } }
+  template:
+    metadata: { labels: { app: immudb } }
+    spec:
+      containers:
+        - name: immudb
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports: [{ containerPort: 3322 }]

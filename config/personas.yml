@@ -1,0 +1,6 @@
+# Lightweight example; replace with full 16x16 matrix later.
+personas:
+  - name: "explorer"
+    weights: {engagement: 0.6, novelty: 0.3, coherence: 0.1}
+  - name: "speedrunner"
+    weights: {engagement: 0.4, novelty: 0.4, coherence: 0.2}

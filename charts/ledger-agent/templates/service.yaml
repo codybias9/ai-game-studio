@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ledger-agent
+spec:
+  selector:
+    app: ledger-agent
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

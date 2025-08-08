@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proto-orchestrator
+  labels:
+    app: proto-orchestrator
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: proto-orchestrator
+  template:
+    metadata:
+      labels:
+        app: proto-orchestrator
+    spec:
+      containers:
+        - name: proto-orchestrator
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "proto-orchestrator"

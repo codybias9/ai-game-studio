@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: persona-swarm
+  labels:
+    app: persona-swarm
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: persona-swarm
+  template:
+    metadata:
+      labels:
+        app: persona-swarm
+    spec:
+      containers:
+        - name: persona-swarm
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "persona-swarm"

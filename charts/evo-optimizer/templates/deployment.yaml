@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evo-optimizer
+  labels:
+    app: evo-optimizer
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: evo-optimizer
+  template:
+    metadata:
+      labels:
+        app: evo-optimizer
+    spec:
+      containers:
+        - name: evo-optimizer
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVICE_NAME
+              value: "evo-optimizer"
