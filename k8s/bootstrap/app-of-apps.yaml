@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-org/ai-game-studio
+    repoURL: https://github.com/codybias9/ai-game-studio
     targetRevision: main
     path: k8s/bootstrap/apps
   destination:
